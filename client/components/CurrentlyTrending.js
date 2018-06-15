@@ -1,42 +1,59 @@
 
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
 import axios from 'axios'
+import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
+import { addNewTopic } from '../store/topic'
+import { DataSearch } from './DataSearch'
 
 
 
-export default class CurrentlyTrending extends Component {
+export class CurrentlyTrending extends Component {
   constructor() {
     super()
 
     this.state = {
-      headlines: []
+      trendingNews: [],
+      articleTitle: '',
+      articleSource: ''
     }
 
+    this.followNews = this.followNews.bind(this)
+    this.readNews = this.readNews.bind(this)
 
   }
 
   async componentDidMount () {
 
+
     const {data} = await axios.get('https://newsapi.org/v2/top-headlines?' +
           'country=us&' +
           'apiKey=4381ce80ddbd41408d0577e2416f1d15')
 
-
-    this.setState({headlines: data.articles.slice(0, 10)})
+    this.setState({
+      trendingNews: data.articles.slice(0, 10),
+      articleTitle: '',
+      articleSource: ''
+    })
 
   }
 
-  followNews () {
+  followNews (sourceName) {
+    const user = this.props.user
+      this.props.addNewTopic({name: sourceName}, user.id)
+  }
 
+  readNews (title, sourceName) {
+    this.setState({articleTitle: title,
+      articleSource: sourceName
+    })
   }
 
 
   render() {
     console.log(this.state.headlines)
 
-    return (
+    return (!this.state.articleTitle) ? (
       <div className='headlines'>
 
       {
@@ -47,8 +64,9 @@ export default class CurrentlyTrending extends Component {
               <div className="headline-text">{headline.title}</div>
               <div className="publication-name">{headline.source.name}</div>
               <div className="headline-btns">
-              <Button variant="contained" color="primary" onClick={() => followNews(headline.source.name)}>Follow Media</ Button>
-              <Button variant="contained" color="primary" >Read</ Button>
+              <Button variant="contained" color="primary" onClick={() => this.followNews(headline.source.name)}>Follow Media</ Button>
+              <Button variant="contained" color="primary" onClick={() =>
+              this.readNews(headline.title, headline.source.name)}>Read</ Button>
               </div>
             </div>
 
@@ -57,19 +75,17 @@ export default class CurrentlyTrending extends Component {
         )
       }
       </div>
-    )
+    ) : <DataSearch title={this.state.articleTitle} source={this.state.articleSource} />
   }
 }
-/**
- * CONTAINER
- */
 
 
+const mapStateToProps = (state) => ({
+  user: state.user
+})
 
+const mapDispatchToProps = (dispatch) => ({
+  addNewTopic: (topic, userId) => dispatch(addNewTopic(topic, userId))
+})
 
-
-
-
-/**
- * PROP TYPES
- */
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentlyTrending)

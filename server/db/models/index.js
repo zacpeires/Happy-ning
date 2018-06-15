@@ -12,8 +12,8 @@ const Data = require('./data')
 
 User.belongsToMany(Topic, {through: 'following'})
 Topic.belongsToMany(User, {through: 'following'})
-Data.belongsToMany(User, {through: 'following'})
-User.belongsToMany(Data, {through: 'following'})
+Data.belongsToMany(User, {through: 'analytics'})
+User.belongsToMany(Data, {through: 'analytics'})
 Topic.hasMany(Data)
 Data.belongsTo(Topic)
 

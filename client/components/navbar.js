@@ -18,7 +18,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       {isLoggedIn ? (
         <div>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><Link to="/home">Home</Link></li>
+            <li><Link to="/">Home</Link></li>
             <li><a href="#" onClick={handleClick}>
                 Logout
               </a></li>
