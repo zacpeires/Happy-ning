@@ -31,7 +31,7 @@ export class CurrentlyTrending extends Component {
           'apiKey=4381ce80ddbd41408d0577e2416f1d15')
 
     this.setState({
-      trendingNews: data.articles.slice(0, 10),
+      trendingNews: data.articles.slice(0, 9),
       articleTitle: '',
       articleSource: ''
     })
@@ -51,13 +51,13 @@ export class CurrentlyTrending extends Component {
 
 
   render() {
-    console.log(this.state.headlines)
+    console.log(this.state.trendingNews)
 
     return (!this.state.articleTitle) ? (
       <div className='headlines'>
-
+          <span className='trending-text'>Trending today:</span>
       {
-        this.state.headlines.map(headline => {
+        this.state.trendingNews.map(headline => {
           return (
 
             <div className='headline-container' id={headline.source.name} key={headline.title}>

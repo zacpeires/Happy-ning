@@ -37,7 +37,6 @@
   "dependencies": {
     "@material-ui/core": "^1.2.1",
     "axios": "^0.15.3",
-    "aylien-news-api": "github:AYLIEN/aylien_newsapi_nodejs",
     "body-parser": "^1.16.1",
     "compression": "^1.7.1",
     "connect-session-sequelize": "^4.1.0",

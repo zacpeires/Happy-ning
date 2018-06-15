@@ -83,27 +83,27 @@ figure img{
   font-size: 20px;
 }
 
-
 .currently-trending-container {
   display: flex;
   justify-content: center;
-  width: 100%;
-  /* flex-grow: 3;
-  flex-wrap: wrap;
-  flex-direction: row; */
-  margin-top: 14%
+  /* flex-direction: row; */
+  align-items: center;
+  margin-top: 16.5%;
+  margin-left: 15.5%;
 }
 
-
-headlines {
+.headlines {
   width: 100%;
-  /* flex-direction: row; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 4;
+
 
 }
 
 .headline-container {
   padding: 20px;
-
+  margin-top: 5%;
 }
 
 
@@ -117,9 +117,19 @@ headlines {
   margin-top: 3px
 }
 
+.headline-btns {
+  padding-top: 10px;
+}
 
 button, html [type="button"], [type="reset"], [type="submit"] {
   margin: 11px;
   -webkit-appearance: button;
 }
 
+.trending-text {
+  position: absolute;
+  margin-left: 28%;
+  padding-bottom: 10%;
+  font-weight: bold;
+  font-size: 16px
+}

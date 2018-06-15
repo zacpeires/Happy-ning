@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
 import CurrentlyTrending from './CurrentlyTrending'
 
 
@@ -17,6 +16,7 @@ export default class HomePage extends Component {
            className='homepage-image'/>
           </figure>
           <div className='homepage-text'>Track you're favourite news and topics</div>
+
           <div className="currently-trending-container">
           <CurrentlyTrending />
           </div>
