@@ -4,28 +4,39 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
+
+
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>BOILERMAKER</h1>
+  <div className='navbar-container'>
     <nav>
+      <div className="nav-wrapper">
+      <div className="brand-logo">Happy-ning</div>
+      <ul id="nav-mobile" className="left hide-on-med-and-down">
+      <li><i className="material-icons">art_track</i></li>
+      </ul>
+
       {isLoggedIn ? (
         <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <li><Link to="/home">Home</Link></li>
+            <li><a href="#" onClick={handleClick}>
+                Logout
+              </a></li>
+          </ul>
         </div>
       ) : (
         <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+           <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <li><Link to="/login">Login</Link></li>
+            <li>  <Link to="/signup">Sign Up</Link></li>
+
+          </ul>
         </div>
       )}
-    </nav>
-    <hr />
-  </div>
+      </div>
+      </nav>
+    </div>
+
 )
 
 /**

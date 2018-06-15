@@ -1,5 +1,5 @@
 {
-  "name": "boilermaker",
+  "name": "happy-ning",
   "version": "1.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
@@ -35,6 +35,7 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^1.2.1",
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",
     "compression": "^1.7.1",
@@ -42,6 +43,10 @@
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
+    "jquery": "^3.3.1",
+    "material-ui": "^1.0.0-beta.47",
+    "materialize": "^1.0.0",
+    "materialize-css": "^1.0.0-rc.1",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
