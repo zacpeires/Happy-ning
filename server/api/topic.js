@@ -15,6 +15,7 @@ router.post('/:userId', async (req, res, next) => {
   } catch (error) { next(error) }
 })
 
+
 router.get('/:userId', async (req, res, next) => {
   try {
 
@@ -22,6 +23,21 @@ router.get('/:userId', async (req, res, next) => {
     const topics = await user.getTopics()
     res.json(topics)
 
+
+  } catch (error) { next(error) }
+})
+
+
+router.put('/:userId/:topicId', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.userId)
+    const topic = await Topic.findById(req.params.topicId)
+    await user.removeTopic(topic)
+    await topic.removeUser(user)
+    const topics = await user.getTopics()
+    console.log(topics)
+
+    res.send(topics)
 
   } catch (error) { next(error) }
 })

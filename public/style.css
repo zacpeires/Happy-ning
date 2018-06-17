@@ -46,6 +46,7 @@ ul:not(.browser-default) {
 .homepage-container {
   height: 100%;
   width: 100%;
+  margin-bottom: 60px
 }
 
 figure{
@@ -97,13 +98,16 @@ figure img{
   display: flex;
   flex-wrap: wrap;
   flex-grow: 4;
+  height: 100%
 
 
 }
 
 .headline-container {
   padding: 20px;
-  margin-top: 5%;
+  margin-top: 4%;
+  padding-top: 1%;
+  padding-bottom: 0
 }
 
 
@@ -114,7 +118,6 @@ figure img{
 
 .publication-name {
   font-weight: bold;
-  margin-top: 3px
 }
 
 .headline-btns {
@@ -129,7 +132,31 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 .trending-text {
   position: absolute;
   margin-left: 28%;
-  padding-bottom: 10%;
   font-weight: bold;
-  font-size: 16px
+  font-size: 16px;
+}
+
+
+.sidenav.sidenav-fixed {
+  padding: 0;
+}
+
+
+
+.sidenav {
+  background-color:  grey
+}
+
+
+ .sidenav li>a {
+    color: rgb(0, 0, 0);
+}
+
+.user-topics-container {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 3;
+  height: 100%;
+  margin-left: 13%
 }

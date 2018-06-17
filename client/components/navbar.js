@@ -1,18 +1,45 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import { connect } from 'react-redux'
+import Sidebar from './Sidebar'
 
 
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+export class Navbar extends Component {
+    constructor() {
+    super()
+
+    this.state = {
+      showSidebar: ''
+    }
+
+    this.toggleSidebar = this.toggleSidebar.bind(this)
+  }
+
+  toggleSidebar() {
+    if (!this.state.showSidebar) {
+    this.setState({
+      showSidebar: 'sidenav-fixed'
+    })
+  } else {
+    this.setState({
+      showSidebar: ''
+    })
+  }
+  }
+
+  render() {
+    const {handleClick, isLoggedIn} = this.props
+
+    return  (
   <div className='navbar-container'>
     <nav>
       <div className="nav-wrapper">
-      <div className="brand-logo">Happy-ning</div>
+      <div className="brand-logo"  onClick={this.toggleSidebar}>Happy-ning</div>
       <ul id="nav-mobile" className="left hide-on-med-and-down">
-      <li><i className="material-icons">art_track</i></li>
+      <li onClick={this.toggleSidebar}><i className="material-icons">art_track</i></li>
       </ul>
 
       {isLoggedIn ? (
@@ -29,15 +56,16 @@ const Navbar = ({handleClick, isLoggedIn}) => (
            <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li><Link to="/login">Login</Link></li>
             <li>  <Link to="/signup">Sign Up</Link></li>
-
           </ul>
         </div>
       )}
       </div>
+      <Sidebar sidenav={this.state.showSidebar} toggleSidebar={this.toggleSidebar}/>
       </nav>
     </div>
-
-)
+  )
+  }
+}
 
 /**
  * CONTAINER
@@ -55,6 +83,7 @@ const mapDispatch = dispatch => {
     }
   }
 }
+
 
 export default connect(mapState, mapDispatch)(Navbar)
 

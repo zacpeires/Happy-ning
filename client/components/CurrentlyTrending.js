@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
-import { addNewTopic } from '../store/topic'
-import { DataSearch } from './DataSearch'
+import { addNewTopic } from '../store/topics'
+import ReadArticle from './ReadArticle'
 
 
 
@@ -24,7 +24,6 @@ export class CurrentlyTrending extends Component {
   }
 
   async componentDidMount () {
-
 
     const {data} = await axios.get('https://newsapi.org/v2/top-headlines?' +
           'country=us&' +
@@ -51,11 +50,10 @@ export class CurrentlyTrending extends Component {
 
 
   render() {
-    console.log(this.state.trendingNews)
 
     return (!this.state.articleTitle) ? (
       <div className='headlines'>
-          <span className='trending-text'>Trending today:</span>
+          <span className='trending-text'>Today's news:</span>
       {
         this.state.trendingNews.map(headline => {
           return (
@@ -64,7 +62,7 @@ export class CurrentlyTrending extends Component {
               <div className="headline-text">{headline.title}</div>
               <div className="publication-name">{headline.source.name}</div>
               <div className="headline-btns">
-              <Button variant="contained" color="primary" onClick={() => this.followNews(headline.source.name)}>Follow Media</ Button>
+              <Button variant="contained" color="primary" onClick={() => this.followNews(headline.source.name)}>Follow source</ Button>
               <Button variant="contained" color="primary" onClick={() =>
               this.readNews(headline.title, headline.source.name)}>Read</ Button>
               </div>
@@ -75,7 +73,7 @@ export class CurrentlyTrending extends Component {
         )
       }
       </div>
-    ) : <DataSearch title={this.state.articleTitle} source={this.state.articleSource} />
+    ) : <ReadArticle />
   }
 }
 
@@ -85,7 +83,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  addNewTopic: (topic, userId) => dispatch(addNewTopic(topic, userId))
+  addNewTopic: (topic, userId) => dispatch(addNewTopic(topic, userId)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentlyTrending)
+export default connect(null, mapDispatchToProps)(CurrentlyTrending)
