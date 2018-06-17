@@ -1,9 +1,10 @@
 
+const AYLIENTextAPI = require('aylien_textapi');
 import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
-import { addNewTopic } from '../store/topics'
+import { addNewTopic, getUserTopic } from '../store/topics'
 import ReadArticle from './ReadArticle'
 
 
@@ -14,12 +15,13 @@ export class CurrentlyTrending extends Component {
 
     this.state = {
       trendingNews: [],
-      articleTitle: '',
-      articleSource: ''
+      checkedForTopics: false,
+      content: []
     }
 
     this.followNews = this.followNews.bind(this)
-    this.readNews = this.readNews.bind(this)
+    this.getTopics = this.getTopics.bind(this)
+    // this.readNews = this.readNews.bind(this)
 
   }
 
@@ -29,29 +31,67 @@ export class CurrentlyTrending extends Component {
           'country=us&' +
           'apiKey=4381ce80ddbd41408d0577e2416f1d15')
 
+
+    const refinedData = data.articles.filter((article => {
+      return article.source.id
+    }))
+
     this.setState({
-      trendingNews: data.articles.slice(0, 9),
-      articleTitle: '',
-      articleSource: ''
+      trendingNews: refinedData.slice(0, 9),
     })
-
   }
 
-  followNews (sourceName) {
+  getTopics (userId) {
+    this.props.getUserTopic(userId)
+    this.setState({
+      checkedForTopics: true
+    })
+  }
+
+
+  followNews (sourceName, sourceId) {
+    console.log(this.props.user)
     const user = this.props.user
-      this.props.addNewTopic({name: sourceName}, user.id)
+    let hasFavouritedTopic = false
+    this.props.topics.forEach(topic => {
+      if (topic.name === sourceName) {
+        hasFavouritedTopic = true
+      }
+    })
+
+    if (hasFavouritedTopic === false) {
+      this.props.addNewTopic({name: sourceName,
+      sourceId: sourceId}, user.id)
+    }
   }
 
-  readNews (title, sourceName) {
-    this.setState({articleTitle: title,
-      articleSource: sourceName
-    })
-  }
+//    readNews (title, sourceName, url) {
+//     var textapi = new AYLIENTextAPI({
+//   application_id: "348dbc69",
+//   application_key: "3a8432b025b627a51d4a2f7fe250a820"
+// });
+
+// let info = []
+
+//  textapi.extract({'url': url}, function(error, response) {
+//   if (error === null) {
+//     info.push(response)
+//   }
+// })
+
+
+// setTimeout(function(){ console.log(info); }, 1000);
+
+//   }
 
 
   render() {
+    if (this.props.user.id && !this.props.topics.length && this.state.checkedForTopics === false) {
+      this.getTopics(this.props.user.id)
+    }
 
-    return (!this.state.articleTitle) ? (
+
+    return (
       <div className='headlines'>
           <span className='trending-text'>Today's news:</span>
       {
@@ -62,9 +102,9 @@ export class CurrentlyTrending extends Component {
               <div className="headline-text">{headline.title}</div>
               <div className="publication-name">{headline.source.name}</div>
               <div className="headline-btns">
-              <Button variant="contained" color="primary" onClick={() => this.followNews(headline.source.name)}>Follow source</ Button>
+              <Button variant="contained" color="primary" onClick={() => this.followNews(headline.source.name, headline.source.id)}>Follow source</ Button>
               <Button variant="contained" color="primary" onClick={() =>
-              this.readNews(headline.title, headline.source.name)}>Read</ Button>
+              this.readNews(headline.title, headline.source.name, headline.url)}>Read</ Button>
               </div>
             </div>
 
@@ -73,17 +113,17 @@ export class CurrentlyTrending extends Component {
         )
       }
       </div>
-    ) : <ReadArticle />
+    )
   }
 }
 
-
-const mapStateToProps = (state) => ({
-  user: state.user
+const mapStateToProps = state => ({
+    topics: state.topics
 })
 
 const mapDispatchToProps = (dispatch) => ({
   addNewTopic: (topic, userId) => dispatch(addNewTopic(topic, userId)),
+  getUserTopic: id => dispatch(getUserTopic(id))
 })
 
-export default connect(null, mapDispatchToProps)(CurrentlyTrending)
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentlyTrending)

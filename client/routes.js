@@ -6,6 +6,8 @@ import {Login, Signup} from './components'
 import {me} from './store'
 import HomePage from './components/HomePage'
 import UserNews from './components/UserNews'
+import StoriesFromSource from './components/StoriesFromSource'
+import Search from './components/search'
 
 
 /**
@@ -24,7 +26,8 @@ class Routes extends Component {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/home" component={HomePage} />
         <Route path="/user-news" component={UserNews} />
-        {/* <Route exact path="/search" component={Search} /> */}
+        <Route exact path="/news/:topic" component={StoriesFromSource} />
+        <Route exact path="/search" component={Search} />
       </Switch>
     )
   }
@@ -41,7 +44,7 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me())

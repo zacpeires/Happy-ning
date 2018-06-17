@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 const Sidebar = props => {
   return (
@@ -14,10 +15,13 @@ const Sidebar = props => {
               {/* <img className="circle" src="images/yuna.jpg" /> */}
             </a>
             <a href="#name">
+              <span className="white-text name">Account Details and Settings:</span>
+            </a>
+            <a href="#name">
               <span className="white-text name">John Doe</span>
             </a>
             <a href="#email">
-              <span className="white-text email">jdandturk@gmail.com</span>
+              <span className="white-text email">{props.user.email}</span>
             </a>
           </div>
         </li>
@@ -52,4 +56,10 @@ const Sidebar = props => {
   )
 }
 
-export default Sidebar
+
+const mapStateToProps = (state) => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps, null)(Sidebar)
+

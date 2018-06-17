@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import UserStories from './UserStories'
 import {getUserTopic, removeTopicFromUser} from '../store/topics'
 
+
 export class UserNews extends Component {
   constructor() {
     super()
 
     this.unfollowNews = this.unfollowNews.bind(this)
-    this.currentNews = this.currentNews.bind(this)
     this.loadUser = this.loadUser.bind(this)
   }
 
@@ -18,12 +18,6 @@ export class UserNews extends Component {
 
   unfollowNews(user, topic) {
     this.props.removeTopicFromUser(user, topic)
-  }
-
-  currentNews(title, sourceName) {
-    // this.setState({articleTitle: title,
-    //   articleSource: sourceName
-    // })
   }
 
   render() {

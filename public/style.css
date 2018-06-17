@@ -90,7 +90,7 @@ figure img{
   /* flex-direction: row; */
   align-items: center;
   margin-top: 16.5%;
-  margin-left: 15.5%;
+  margin-left: 13%;
 }
 
 .headlines {
@@ -131,7 +131,7 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 
 .trending-text {
   position: absolute;
-  margin-left: 28%;
+  margin-left: 30%;
   font-weight: bold;
   font-size: 16px;
 }
@@ -159,4 +159,23 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   flex-grow: 3;
   height: 100%;
   margin-left: 13%
+}
+
+
+.articles-container {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 4;
+  height: 100%;
+  margin-left: 15%;
+
+
+}
+
+.articles {
+  padding: 20px;
+  margin-top: 4%;
+  padding-top: 1%;
+  padding-bottom: 0
 }
