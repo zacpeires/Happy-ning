@@ -8,6 +8,7 @@ import HomePage from './components/HomePage'
 import UserNews from './components/UserNews'
 import StoriesFromSource from './components/StoriesFromSource'
 import Search from './components/search'
+import ReadArticle from './components/ReadArticle'
 
 
 /**
@@ -28,6 +29,7 @@ class Routes extends Component {
         <Route path="/user-news" component={UserNews} />
         <Route exact path="/news/:topic" component={StoriesFromSource} />
         <Route exact path="/search" component={Search} />
+        <Route exact path="/article" component={ReadArticle} />
       </Switch>
     )
   }

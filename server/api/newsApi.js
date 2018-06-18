@@ -21,7 +21,7 @@ router.post('/', (req, res, next) => {
     })
 
     setTimeout(function(){
-      res.json(info) }, 3000);
+      res.json(info) }, 1500);
 
   } catch(error) {next(error)}
 })

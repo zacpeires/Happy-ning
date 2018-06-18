@@ -43,7 +43,6 @@ export const removeTopicFromUser = (userId, topicId) => {
   return async (dispatch) => {
     console.log('test1')
   const { data } = await axios.put(`/api/topic/${userId}/${topicId}`)
-console.log('test2', data)
   dispatch(removeTopic(data))
   }
 }

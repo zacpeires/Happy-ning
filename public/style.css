@@ -213,3 +213,17 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 .search-text {
   width: 270px
 }
+
+.article-contents {
+  width: 60%;
+  margin-left: 20%;
+  padding-top: 12%;
+
+}
+
+.author-and-contents {
+  position: absolute;
+  width: 50%;
+  margin-left: 35%;
+  padding-top: 5%;
+}

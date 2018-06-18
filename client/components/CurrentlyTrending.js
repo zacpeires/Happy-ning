@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import { addNewTopic, getUserTopic } from '../store/topics'
+import { addNewArticle } from '../store/articles'
 
 
 
@@ -61,9 +63,8 @@ export class CurrentlyTrending extends Component {
     }
   }
 
-   async readNews (title, sourceName, url) {
-    const {data} = await axios.post(`/api/news/`, {url: url})
-
+   readNews (url) {
+    this.props.addNewArticle(url)
   }
 
 
@@ -87,8 +88,12 @@ export class CurrentlyTrending extends Component {
               <div className="publication-name">{headline.source.name}</div>
               <div className="headline-btns">
               <Button variant="contained" color="primary" onClick={() => this.followNews(headline.source.name, headline.source.id)}>Follow source</ Button>
+              <Link to='/article'>
               <Button variant="contained" color="primary" onClick={() =>
-              this.readNews(headline.title, headline.source.name, headline.url)}>Read</ Button>
+              this.readNews(headline.url)}>Read</ Button>
+              </Link>
+
+
               </div>
             </div>
 
@@ -108,7 +113,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   addNewTopic: (topic, userId) => dispatch(addNewTopic(topic, userId)),
   getUserTopic: id => dispatch(getUserTopic(id)),
-  // readNewsArticle: url => dispatch(readNewsArticle(url))
+  addNewArticle: url => dispatch(addNewArticle(url))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentlyTrending)
