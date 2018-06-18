@@ -18,6 +18,8 @@ export class StoriesFromSource extends Component {
   }
 
   async getNews () {
+    console.log(this.props.user)
+
     const channelName = this.props.match.params.topic
     const newsChannel = this.props.topics.filter(topic => {
       return topic.name === channelName
@@ -65,6 +67,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
+  user: state.user,
   topics: state.topics
 })
 

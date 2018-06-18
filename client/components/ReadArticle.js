@@ -12,7 +12,6 @@ export class ReadArticle extends Component {
     this.state = {
       article: {},
       articleSentiment: {},
-      beenCalled: false
     }
 
     this.getArticles = this.getArticles.bind(this)
@@ -21,8 +20,9 @@ export class ReadArticle extends Component {
 
 
   async getArticles () {
-    const {data} = await axios.get(`https://newsapi.org/v2/top-headlines?sources=${this.props.match.params.sourceId}&apiKey=4381ce80ddbd41408d0577e2416f1d15`)
+    const {data} = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=4381ce80ddbd41408d0577e2416f1d15`)
 
+    console.log(data)
 
 
 
@@ -30,16 +30,9 @@ export class ReadArticle extends Component {
 
       return article.title === this.props.match.params.title
     })
-
-
-    console.log(newArticle[0])
-
-
       this.props.addNewArticle(newArticle[0].url)
 
 
-
-    console.log(data)
 
 
     setTimeout(() => {

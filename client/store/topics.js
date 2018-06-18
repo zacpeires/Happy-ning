@@ -35,6 +35,7 @@ export const addNewTopic = (topic, userId) => {
  export const getUserTopic = (userId) => {
   return async (dispatch) => {
   const { data } = await axios.get(`/api/topic/${userId}`)
+  console.log(data)
     dispatch(getTopics(data))
   }
 }

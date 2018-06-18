@@ -21,6 +21,9 @@ export class UserNews extends Component {
   }
 
   unfollowNews(user, topic) {
+    console.log(this.state.removedAllTopics)
+    console.log(this.props.topics.length)
+
     this.props.removeTopicFromUser(user, topic)
     if (this.props.topics.length === 1) {
       this.setState({
