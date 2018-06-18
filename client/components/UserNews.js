@@ -7,9 +7,13 @@ import {getUserTopic, removeTopicFromUser} from '../store/topics'
 export class UserNews extends Component {
   constructor() {
     super()
+    this.state = {
+      removedAllTopics: false
+    }
 
     this.unfollowNews = this.unfollowNews.bind(this)
     this.loadUser = this.loadUser.bind(this)
+
   }
 
   loadUser(user) {
@@ -18,10 +22,15 @@ export class UserNews extends Component {
 
   unfollowNews(user, topic) {
     this.props.removeTopicFromUser(user, topic)
+    if (this.props.topics.length === 1) {
+      this.setState({
+        removedAllTopics: true
+      })
+    }
   }
 
   render() {
-    if (this.props.user.id && !this.props.topics.length) {
+    if (this.props.user.id && !this.props.topics.length && !this.state.removedAllTopics) {
       this.loadUser(this.props.user.id)
     }
 
