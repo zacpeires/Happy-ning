@@ -7,8 +7,8 @@ router.post('/extract', (req, res, next) => {
   try {
 
     var textapi = new AYLIENTextAPI({
-      application_id: "348dbc69",
-      application_key: "3a8432b025b627a51d4a2f7fe250a820"
+      application_id: "f8485cb5",
+      application_key: "f0198a611a95a115f7861dc9c2d6abc2"
     });
 
     let info = []
@@ -16,6 +16,9 @@ router.post('/extract', (req, res, next) => {
      textapi.extract({'url': req.body.url}, function(error, response) {
       if (error === null) {
         info.push(response)
+        console.log(response)
+      } else {
+        console.log(error)
       }
     })
 
