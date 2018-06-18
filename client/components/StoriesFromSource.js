@@ -15,7 +15,6 @@ export class StoriesFromSource extends Component {
     }
 
     this.getNews = this.getNews.bind(this)
-    this.readNews = this.readNews.bind(this)
   }
 
   async getNews () {
@@ -26,7 +25,6 @@ export class StoriesFromSource extends Component {
   const sourceId = (newsChannel[0].sourceId)
 
     const {data} = await axios.get(`https://newsapi.org/v2/top-headlines?sources=${sourceId}&apiKey=4381ce80ddbd41408d0577e2416f1d15`)
-          console.log(data.articles)
 
     this.setState({
       news: data.articles
@@ -34,9 +32,9 @@ export class StoriesFromSource extends Component {
 
   }
 
-  readNews (url) {
-    this.props.addNewArticle(url)
-  }
+  // readNews (url) {
+  //   this.props.addNewArticle(url)
+  // }
 
 
 

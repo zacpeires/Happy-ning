@@ -20,7 +20,7 @@ router.post('/extract', (req, res, next) => {
     })
 
     setTimeout(function(){
-      res.json(info) }, 1700);
+      res.json(info) }, 3000);
 
   } catch(error) {next(error)}
 })

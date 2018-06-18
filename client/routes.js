@@ -29,7 +29,7 @@ class Routes extends Component {
         <Route path="/user-news" component={UserNews} />
         <Route exact path="/news/:topic" component={StoriesFromSource} />
         <Route exact path="/search" component={Search} />
-        <Route exact path="/article" component={ReadArticle} />
+        <Route exact path="/article/:sourceId/:title" component={ReadArticle} />
       </Switch>
     )
   }

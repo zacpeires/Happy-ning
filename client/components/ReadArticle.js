@@ -1,8 +1,11 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
+import { addNewArticle } from '../store/articles'
+// import { checkArticleSentiment } from '../store/articleSentiment'
 
-export class HomePage extends Component {
+export class ReadArticle extends Component {
     constructor() {
     super()
 
@@ -16,21 +19,36 @@ export class HomePage extends Component {
   }
 
 
-  getArticles () {
-    this.setState({
-      article: this.props.articles,
-      articleSentiment: this.props.articleSentiment
+  async getArticles () {
+    const {data} = await axios.get(`https://newsapi.org/v2/top-headlines?sources=${this.props.match.params.sourceId}&apiKey=4381ce80ddbd41408d0577e2416f1d15`)
+
+
+    const newArticle = data.articles.filter(article => {
+      return article.title === this.props.match.params.title
     })
 
-    console.log(this.state)
+    console.log(newArticle[0].url)
+
+  const readableArticle = setTimeout(() => {
+  this.props.addNewArticle(newArticle[0].url)
+    }, 2000)
+
+
+
+    setTimeout(() => {
+      this.setState({
+        article: this.props.articles
+      })
+    }, 3000)
+
+    console.log(this.state.article)
   }
 
 
+
   render() {
-    if (!this.state.article.article && this.state) {
-      setTimeout(() => {
+    if (!this.state.article.length) {
         this.getArticles()
-      }, 500)
     }
 
     return (
@@ -77,9 +95,13 @@ export class HomePage extends Component {
 const mapStateToProps = (state) => ({
   user: state.user,
   articles: state.articles,
-  articleSentiment: state.articleSentiment
+  // articleSentiment: state.articleSentiment
 
 })
 
+const mapDispatchToProps = (dispatch) => ({
+  addNewArticle: url => dispatch(addNewArticle(url)),
+  // checkArticleSentiment: url => dispatch(checkArticleSentiment(url))
+})
 
-export default connect(mapStateToProps)(HomePage)
+export default connect(mapStateToProps, mapDispatchToProps)(ReadArticle)

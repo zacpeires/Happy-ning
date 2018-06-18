@@ -10,11 +10,10 @@ const ArticleFormat = props => {
       <div className="headline-text">{props.news.title}</div>
       <div className="publication-name">{props.news.source.name}</div>
       <div className="headline-btns">
-      <Link to='/article'>
+      <Link to={`/article/${props.news.source.id}/${props.news.title}`}>
         <Button
           variant="contained"
           color="primary"
-          onClick={() => props.readNews(props.news.url)}
         >
           Read
         </Button>

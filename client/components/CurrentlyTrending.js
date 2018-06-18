@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import { addNewTopic, getUserTopic } from '../store/topics'
-import { addNewArticle } from '../store/articles'
-import { checkArticleSentiment } from '../store/articleSentiment'
+
 
 
 
@@ -33,16 +32,6 @@ export class CurrentlyTrending extends Component {
     const refinedData = data.articles.filter((article => {
       return article.source.id
     })).slice(0, 9)
-
-
-  //  const urls = refinedData.map(article => {
-  //   return article.url
-  // })
-
-  //  urls.map( url => {
-  //  return this.props.checkArticleSentiment(url)
-  // })
-
 
   this.setState({
     trendingNews: refinedData,
@@ -75,10 +64,10 @@ export class CurrentlyTrending extends Component {
     }
   }
 
-   readNews (url) {
-    this.props.addNewArticle(url)
-    this.props.checkArticleSentiment(url)
-  }
+  //  readNews (url) {
+  //   this.props.addNewArticle(url)
+  //   this.props.checkArticleSentiment(url)
+  // }
 
 
   render() {
@@ -100,9 +89,8 @@ export class CurrentlyTrending extends Component {
               <div className="publication-name">{headline.source.name}</div>
               <div className="headline-btns">
               <Button variant="contained" color="primary" onClick={() => this.followNews(headline.source.name, headline.source.id)}>Follow source</ Button>
-              <Link to='/article'>
-              <Button variant="contained" color="primary" onClick={() =>
-              this.readNews(headline.url)}>Read</ Button>
+              <Link to={`/article/${headline.source.id}/${headline.title}`}>
+              <Button variant="contained" color="primary">Read</ Button>
               </Link>
 
 
@@ -125,8 +113,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   addNewTopic: (topic, userId) => dispatch(addNewTopic(topic, userId)),
   getUserTopic: id => dispatch(getUserTopic(id)),
-  addNewArticle: url => dispatch(addNewArticle(url)),
-  checkArticleSentiment: url => dispatch(checkArticleSentiment(url))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentlyTrending)

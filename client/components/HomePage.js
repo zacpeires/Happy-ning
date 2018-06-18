@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import CurrentlyTrending from './CurrentlyTrending'
 import { connect } from 'react-redux'
 
+
 export class HomePage extends Component {
     constructor() {
     super()
@@ -20,7 +21,7 @@ export class HomePage extends Component {
           </figure>
           <div className='homepage-text'>Track you're favourite news and topics</div>
           <div className="currently-trending-container">
-          <CurrentlyTrending user={this.props.user} hello="hello"/>
+          <CurrentlyTrending user={this.props.user} />
           </div>
         </div>
 

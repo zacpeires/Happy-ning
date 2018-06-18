@@ -18,7 +18,6 @@ export class Search extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.readNews = this.readNews.bind(this)
 
   }
 
@@ -48,9 +47,9 @@ export class Search extends Component {
   }
 
 
-  readNews (url) {
-    this.props.addNewArticle(url)
-  }
+  // readNews (url) {
+  //   this.props.addNewArticle(url)
+  // }
 
 
   render() {
