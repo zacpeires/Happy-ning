@@ -6,7 +6,6 @@ import axios from 'axios'
 
 const GET_ARTICLE = 'GET_ARTICLE'
 
-
 /**
  * INITIAL STATE
  */
@@ -24,13 +23,10 @@ const readArticle = article => ({type: GET_ARTICLE, article})
 
 export const addNewArticle = (url) => {
    return async (dispatch) => {
-    const {data} = await axios.post(`/api/news/`, {url: url})
+    const {data} = await axios.post(`/api/news/extract`, {url: url})
       dispatch(readArticle(data[0]))
    }
  }
-
-
-
 
 
 /**

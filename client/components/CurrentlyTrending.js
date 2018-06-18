@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import { addNewTopic, getUserTopic } from '../store/topics'
 import { addNewArticle } from '../store/articles'
+import { checkArticleSentiment } from '../store/articleSentiment'
 
 
 
@@ -31,12 +32,24 @@ export class CurrentlyTrending extends Component {
 
     const refinedData = data.articles.filter((article => {
       return article.source.id
-    }))
+    })).slice(0, 9)
 
-    this.setState({
-      trendingNews: refinedData.slice(0, 9),
-    })
+
+  //  const urls = refinedData.map(article => {
+  //   return article.url
+  // })
+
+  //  urls.map( url => {
+  //  return this.props.checkArticleSentiment(url)
+  // })
+
+
+  this.setState({
+    trendingNews: refinedData,
+  })
+
   }
+
 
   getTopics (userId) {
     this.props.getUserTopic(userId)
@@ -64,6 +77,7 @@ export class CurrentlyTrending extends Component {
 
    readNews (url) {
     this.props.addNewArticle(url)
+    this.props.checkArticleSentiment(url)
   }
 
 
@@ -73,10 +87,10 @@ export class CurrentlyTrending extends Component {
     }
 
 
-
     return (
       <div className='headlines'>
           <span className='trending-text'>Today's news:</span>
+
       {
         this.state.trendingNews.map(headline => {
           return (
@@ -111,7 +125,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   addNewTopic: (topic, userId) => dispatch(addNewTopic(topic, userId)),
   getUserTopic: id => dispatch(getUserTopic(id)),
-  addNewArticle: url => dispatch(addNewArticle(url))
+  addNewArticle: url => dispatch(addNewArticle(url)),
+  checkArticleSentiment: url => dispatch(checkArticleSentiment(url))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentlyTrending)
