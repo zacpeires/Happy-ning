@@ -163,12 +163,13 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 
 
 .articles-container {
-  width: 80%;
+  width: 60%;
   display: flex;
   flex-wrap: wrap;
-  flex-grow: 4;
+  flex-grow: 3;
   height: 100%;
-  margin-left: 15%;
+  margin-left: 23%;
+  padding-top: 3%
 
 
 }
@@ -177,5 +178,38 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   padding: 20px;
   margin-top: 4%;
   padding-top: 1%;
-  padding-bottom: 0
+  padding-bottom: 0;
+  width: 30%
+}
+
+.searched-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 10%
+}
+
+
+.search-form{
+  position:absolute;
+  top: 17%;
+  width:30%;
+  height:100px;
+  left:10%
+
+}
+
+.searched-topic {
+  padding-top: 5%;
+  margin-left: 11%;
+  margin-bottom: 4%
+}
+
+.follow-topic-btn {
+  position: absolute;
+  margin-bottom: 10%
+}
+
+.search-text {
+  width: 270px
 }

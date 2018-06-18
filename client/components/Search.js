@@ -1,6 +1,9 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import SearchBar from './SearchBar'
+import axios from 'axios'
+import SearchFormat from './SearchFormat'
 import Button from '@material-ui/core/Button'
 
 
@@ -9,6 +12,7 @@ export default class UserNews extends Component {
     super()
     this.state = {
       searchFor: '',
+      searchData: []
 
     }
 
@@ -24,31 +28,47 @@ export default class UserNews extends Component {
     console.log(this.state.searchFor)
   }
 
-  handleSubmit (event) {
+ async handleSubmit (event) {
     event.preventDefault()
-    console.log('hello')
-    const searchRequest = this.state.searchFor
-    console.log(searchRequest)
+    let searchRequest = this.state.searchFor
+
+    if (searchRequest.split(' ').length > 1) {
+      searchRequest = searchRequest.split(' ').join('-')
+    }
+
+    const {data} = await axios.get(`https://newsapi.org/v2/top-headlines?q=${searchRequest}&apiKey=4381ce80ddbd41408d0577e2416f1d15`)
+
+    console.log(data)
 
     this.setState({
-      searchFor: ''
+      searchFor: '',
+      searchData: data.articles
     })
   }
 
   render() {
 
 
-    return (
+    return !this.state.searchData.length ? (
       <div className="user-topics-container">
       {/* <span>Search for news sources or topics of interest</span> */}
-      <form>
-
-    <input type="search" id="mySearch" value={this.state.searchFor} onChange={this.handleChange}/>
-    <Button variant="contained"
-          color="primary" onClick={this.handleSubmit}>Search</Button>
-      </form>
+      <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} searchFor={this.state.searchFor}/>
 
       </div>
+    ) : (
+      <div className='searched-container'>
+      <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} searchFor={this.state.searchFor}/>
+      {
+
+      this.state.searchData.map(news=> {
+        return (
+      <SearchFormat news={news} key={news.title} className='searched-articles'/>
+        )
+      }
+    )
+      }
+      </div>
+
     )
   }
 }

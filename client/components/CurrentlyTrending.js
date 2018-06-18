@@ -1,11 +1,8 @@
-
-const AYLIENTextAPI = require('aylien_textapi');
 import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import { addNewTopic, getUserTopic } from '../store/topics'
-import ReadArticle from './ReadArticle'
 
 
 
@@ -16,7 +13,6 @@ export class CurrentlyTrending extends Component {
     this.state = {
       trendingNews: [],
       checkedForTopics: false,
-      content: []
     }
 
     this.followNews = this.followNews.bind(this)
@@ -65,30 +61,18 @@ export class CurrentlyTrending extends Component {
     }
   }
 
-//    readNews (title, sourceName, url) {
-//     var textapi = new AYLIENTextAPI({
-//   application_id: "348dbc69",
-//   application_key: "3a8432b025b627a51d4a2f7fe250a820"
-// });
+   async readNews (title, sourceName, url) {
+    const {data} = await axios.post(`/api/news/`, {url: url})
 
-// let info = []
-
-//  textapi.extract({'url': url}, function(error, response) {
-//   if (error === null) {
-//     info.push(response)
-//   }
-// })
-
-
-// setTimeout(function(){ console.log(info); }, 1000);
-
-//   }
+  }
 
 
   render() {
     if (this.props.user.id && !this.props.topics.length && this.state.checkedForTopics === false) {
       this.getTopics(this.props.user.id)
     }
+
+    console.log()
 
 
     return (
@@ -123,7 +107,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addNewTopic: (topic, userId) => dispatch(addNewTopic(topic, userId)),
-  getUserTopic: id => dispatch(getUserTopic(id))
+  getUserTopic: id => dispatch(getUserTopic(id)),
+  // readNewsArticle: url => dispatch(readNewsArticle(url))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentlyTrending)

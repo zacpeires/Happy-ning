@@ -13,7 +13,7 @@ export class StoriesFromSource extends Component {
       news: [],
     }
 
-    this.readNews = this.readNews.bind(this)
+    // this.readNews = this.readNews.bind(this)
     this.getNews = this.getNews.bind(this)
   }
 
@@ -31,9 +31,6 @@ export class StoriesFromSource extends Component {
       news: data.articles
     })
 
-  }
-
-  readNews (title, sourceName) {
   }
 
 
