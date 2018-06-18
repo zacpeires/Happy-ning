@@ -18,7 +18,7 @@ const Sidebar = props => {
               <span className="white-text name">Account Details and Settings:</span>
             </a>
             <a href="#name">
-              <span className="white-text name">John Doe</span>
+              <span className="white-text name">Zac Peires</span>
             </a>
             <a href="#email">
               <span className="white-text email">{props.user.email}</span>

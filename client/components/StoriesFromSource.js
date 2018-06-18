@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import ArticleFormat from './ArticleFormat'
+import { addNewArticle } from '../store/articles'
 
 
 export class StoriesFromSource extends Component {
@@ -13,8 +14,8 @@ export class StoriesFromSource extends Component {
       news: [],
     }
 
-    // this.readNews = this.readNews.bind(this)
     this.getNews = this.getNews.bind(this)
+    this.readNews = this.readNews.bind(this)
   }
 
   async getNews () {
@@ -33,6 +34,11 @@ export class StoriesFromSource extends Component {
 
   }
 
+  readNews (url) {
+    this.props.addNewArticle(url)
+  }
+
+
 
   render() {
 
@@ -45,7 +51,7 @@ export class StoriesFromSource extends Component {
       {
         this.state.news.map(news => {
           return (
-            <ArticleFormat key={news.title} news={news} readNews={this.readNews} />
+            <ArticleFormat key={news.title} news={news} readNews={this.readNews}/>
 
           )
           }
@@ -56,8 +62,12 @@ export class StoriesFromSource extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  addNewArticle: url => dispatch(addNewArticle(url))
+})
+
 const mapStateToProps = (state) => ({
   topics: state.topics
 })
 
-export default connect(mapStateToProps, null)(StoriesFromSource)
+export default connect(mapStateToProps, mapDispatchToProps)(StoriesFromSource)

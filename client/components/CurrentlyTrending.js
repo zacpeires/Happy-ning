@@ -19,7 +19,6 @@ export class CurrentlyTrending extends Component {
 
     this.followNews = this.followNews.bind(this)
     this.getTopics = this.getTopics.bind(this)
-    // this.readNews = this.readNews.bind(this)
 
   }
 
@@ -73,7 +72,6 @@ export class CurrentlyTrending extends Component {
       this.getTopics(this.props.user.id)
     }
 
-    console.log()
 
 
     return (

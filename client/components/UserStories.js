@@ -14,7 +14,7 @@ const UserStories = props => {
   <Button variant="contained" color="primary" onClick={() => props.unfollowNews(props.user.id, props.topic.id)}>Unfollow media</ Button>
 
   <Link to={`/news/${props.topic.name}`}>
-  <Button variant="contained" color="primary" >See articles form this source</ Button>
+  <Button variant="contained" color="primary" >See articles from this source</ Button>
   </Link>
   </div>
   </div>

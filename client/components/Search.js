@@ -3,11 +3,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import SearchBar from './SearchBar'
 import axios from 'axios'
+import { addNewArticle } from '../store/articles'
 import SearchFormat from './SearchFormat'
-import Button from '@material-ui/core/Button'
 
 
-export default class UserNews extends Component {
+export class Search extends Component {
   constructor() {
     super()
     this.state = {
@@ -18,6 +18,7 @@ export default class UserNews extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.readNews = this.readNews.bind(this)
 
   }
 
@@ -46,6 +47,12 @@ export default class UserNews extends Component {
     })
   }
 
+
+  readNews (url) {
+    this.props.addNewArticle(url)
+  }
+
+
   render() {
 
 
@@ -62,7 +69,7 @@ export default class UserNews extends Component {
 
       this.state.searchData.map(news=> {
         return (
-      <SearchFormat news={news} key={news.title} className='searched-articles'/>
+      <SearchFormat news={news} key={news.title} className='searched-articles' readNews={this.readNews}/>
         )
       }
     )
@@ -73,14 +80,13 @@ export default class UserNews extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
 
 
-// const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
+  addNewArticle: url => dispatch(addNewArticle(url))
+})
 
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(UserNews)
+export default connect(null, mapDispatchToProps)(Search)
 
 
 

@@ -25,7 +25,7 @@ export class HomePage extends Component {
 
 
   render() {
-    if (!this.props.articles.length) {
+    if (!this.state.article.article) {
       setTimeout(() => {
         this.getArticles()
       }, 500)
